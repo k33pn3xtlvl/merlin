@@ -2,7 +2,7 @@
 Merlin is a post-exploitation command and control framework.
 
 This file is part of Merlin.
-Copyright (C) 2023 Russel Van Tuyl
+Copyright (C) 2024 Russel Van Tuyl
 
 Merlin is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -71,6 +71,19 @@ func NewInfo(agent uuid.UUID, jobType string, cmd string) Info {
 		agentID: agent,
 		jobType: jobType,
 		token:   uuid.New(),
+		status:  CREATED,
+		created: time.Now().UTC(),
+		command: cmd,
+	}
+	return info
+}
+
+func NewInfoWithID(agent uuid.UUID, jobType string, cmd string, id string, token uuid.UUID) Info {
+	info := Info{
+		id:      id,
+		agentID: agent,
+		jobType: jobType,
+		token:   token,
 		status:  CREATED,
 		created: time.Now().UTC(),
 		command: cmd,
